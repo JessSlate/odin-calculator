@@ -3,20 +3,21 @@ let calcScreen = document.querySelector("#screen p");
 let savedValue = null,
     operator = null;
 
+//flags
 let displayingAnswer = false;
+
 function numberButton(e){
     if(displayingAnswer){
         calcScreen.textContent = "";
         displayingAnswer = false;
     }
-
     calcScreen.textContent += e.target.textContent;
-
 };
 
 function operatorButton(e){
-
-    if(!(savedValue === null)){ //what's on screen must be the 2nd operand
+    // '+', '-', '*', '/'
+    if(!(savedValue === null)){
+        //if there is already a saved value: evaluate the previous equation, display the answer, then save it.
         savedValue = equalsButton();
 
     } else {
@@ -44,19 +45,19 @@ function equalsButton(){
 
 function add(a, b){
     return a + b;
-}
+};
 
 function subtract(a, b){
     return a - b;
-}
+};
 
 function multiply(a, b){
     return a * b;
-}
+};
 
 function divide(a, b){
     return a / b;
-}
+};
 
 function operate(op, a, b){
     switch(op){
@@ -68,19 +69,24 @@ function operate(op, a, b){
             return multiply(a, b);
         case "/":
             return divide(a, b);
-    }
-}
+    };
+};
 
 let numButtons = document.querySelectorAll(".numbers button");
 let oprButtons = document.querySelectorAll(".operators button");
 
 for(let button of numButtons){
-    button.addEventListener("click", numberButton);
+    if(!(button.textContent === "+/-")){
+        button.addEventListener("click", numberButton);
+    }
 };
 
+//document.querySelector("#btn-neg").addEventListener("click", negate);
+
 for(let button of oprButtons){
-    if(!(button.textContent === "="))
+    if(!(button.textContent === "=")){
         button.addEventListener("click", operatorButton);
-}
+    };
+};
 
 document.querySelector("#btn-eql").addEventListener("click", equalsButton);

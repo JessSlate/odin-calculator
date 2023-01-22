@@ -35,12 +35,14 @@ body{
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
+    box-shadow: 10px 7px 7px rgb(175, 175, 175);
 }
 
 #screen{
     background-color: rgb(69, 71, 75);
     text-align: end;
     width: 95%;
+    height: 15%;
     margin-top: 10px;
     box-sizing: border-box;
     border: 2px solid black;
@@ -48,7 +50,7 @@ body{
 #screen p{
     color: rgb(206, 206, 206);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 65px;
+    font-size: 75px;
     margin: 0px;
     min-height: 75px;
     padding: 5px 10px;
@@ -59,7 +61,7 @@ body{
     flex-flow: row wrap;
     background-color: rgb(206, 206, 206);;
     width: 95%;
-    height: 80%;
+    height: 75%;
     margin-top: auto;
     margin-bottom: 25px;
     border-radius: 10px;
@@ -109,13 +111,16 @@ button{
 
 .operators button{
     width: 100%;
+    background-color: rgb(71, 106, 151);
+
+    border-radius: 25px;
+    color: white;
 }
 #btn-eql{
     height: 246px;
+
 }
-#btn-0{
-    flex-grow: 3;
-}
+
 #btn-dec{
     max-width: 119px;
 }
