@@ -9,9 +9,19 @@ let displayingAnswer = false;
 function numberButton(e){
     if(displayingAnswer){
         calcScreen.textContent = "";
-        displayingAnswer = false;
     }
-    calcScreen.textContent += e.target.textContent;
+
+    if(e.target.textContent == "+/-"){
+        if(parseFloat(calcScreen.textContent))
+            calcScreen.textContent = parseFloat(calcScreen.textContent) * -1;
+    } else if(e.target.textContent == ".") {
+        if(!calcScreen.textContent.includes(".")){
+            calcScreen.textContent += e.target.textContent;
+        }
+    } else calcScreen.textContent += e.target.textContent; 
+        
+    
+    displayingAnswer = false;
 };
 
 function operatorButton(e){
@@ -43,20 +53,25 @@ function equalsButton(){
     };
 };
 
+//calculator will round to 3 decimal points
 function add(a, b){
-    return a + b;
+    let ans = a + b;
+    return Math.round(ans * 1000) / 1000;
 };
 
 function subtract(a, b){
-    return a - b;
+    let ans = a - b;
+    return Math.round(ans * 1000) / 1000;
 };
 
 function multiply(a, b){
-    return a * b;
+    let ans = a * b;
+    return Math.round(ans * 1000) / 1000;
 };
 
 function divide(a, b){
-    return a / b;
+    let ans = a / b;
+    return Math.round(ans * 1000) / 1000;
 };
 
 function operate(op, a, b){
@@ -76,9 +91,7 @@ let numButtons = document.querySelectorAll(".numbers button");
 let oprButtons = document.querySelectorAll(".operators button");
 
 for(let button of numButtons){
-    if(!(button.textContent === "+/-")){
         button.addEventListener("click", numberButton);
-    }
 };
 
 //document.querySelector("#btn-neg").addEventListener("click", negate);
