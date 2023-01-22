@@ -3,14 +3,23 @@ let calcScreen = document.querySelector("#screen p");
 let savedValue = null,
     operator = null;
 
-//flags
 let displayingAnswer = false;
 
 function numberButton(e){
     if(displayingAnswer){
         calcScreen.textContent = "";
     }
+    displayingAnswer = false;
+    
+    console.log(calcScreen.textContent.includes("."));
+    if(calcScreen.textContent.split("").length < 10)
+        calcScreen.textContent += e.target.textContent;
+ 
 
+    /*
+    if(calcScreen.textContent.split("").length > 9)
+        return;
+    
     if(e.target.textContent == "+/-"){
         if(parseFloat(calcScreen.textContent))
             calcScreen.textContent = parseFloat(calcScreen.textContent) * -1;
@@ -19,9 +28,29 @@ function numberButton(e){
             calcScreen.textContent += e.target.textContent;
         }
     } else calcScreen.textContent += e.target.textContent; 
+    */
         
-    
+};
+
+function negate(){
+    if(!displayingAnswer){
+        if(parseFloat(calcScreen.textContent))
+            calcScreen.textContent = parseFloat(calcScreen.textContent) * -1;
+    };
+};
+
+function decimalButton(){
+    if(displayingAnswer){
+        calcScreen.textContent = "";
+    }
     displayingAnswer = false;
+
+    let hasDecimal = calcScreen.textContent.includes(".");
+    if(hasDecimal){
+        return;
+    } else {
+        calcScreen.textContent += ".";
+    }
 };
 
 function operatorButton(e){
@@ -91,15 +120,14 @@ let numButtons = document.querySelectorAll(".numbers button");
 let oprButtons = document.querySelectorAll(".operators button");
 
 for(let button of numButtons){
+    if(!isNaN(button.textContent)) //only assign numberButton to 0-9
         button.addEventListener("click", numberButton);
 };
-
-//document.querySelector("#btn-neg").addEventListener("click", negate);
+document.querySelector("#btn-dec").addEventListener("click", decimalButton);
+document.querySelector("#btn-neg").addEventListener("click", negate);
 
 for(let button of oprButtons){
-    if(!(button.textContent === "=")){
+    if(!(button.textContent === "="))
         button.addEventListener("click", operatorButton);
-    };
 };
-
 document.querySelector("#btn-eql").addEventListener("click", equalsButton);
