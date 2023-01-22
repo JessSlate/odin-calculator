@@ -17,7 +17,7 @@ function numberButton(e){
 function operatorButton(e){
 
     if(!(savedValue === null)){ //what's on screen must be the 2nd operand
-        equalsButton();
+        savedValue = equalsButton();
 
     } else {
         savedValue = parseFloat(calcScreen.textContent);
@@ -33,11 +33,12 @@ function equalsButton(){
     if(!operator){
         return;
     } else {
-        console.log("hemlo");
         let screenValue = parseFloat(calcScreen.textContent);
         savedValue = operate(operator, savedValue, screenValue);
         calcScreen.textContent = savedValue;
         operator = null;
+        savedValue = null;
+        return calcScreen.textContent;
     };
 };
 
