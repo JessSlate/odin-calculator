@@ -112,6 +112,9 @@ function divide(a, b){
 };
 
 function mod(a, b){
+    if(b === 0){
+        return "Impossible";
+    }
     return a % b;
 };
 
