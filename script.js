@@ -1,41 +1,45 @@
 let calcScreen = document.querySelector("#screen p");
 
-let firstOperand = null,
-    secondOperand = null,
+let savedValue = null,
     operator = null;
 
-let operatorFlag = false;
+let displayingAnswer = false;
 function numberButton(e){
-    if(operatorFlag){
+    if(displayingAnswer){
         calcScreen.textContent = "";
-        operatorFlag = false;
+        displayingAnswer = false;
     }
 
     calcScreen.textContent += e.target.textContent;
-    
+
 };
 
 function operatorButton(e){
-    operatorFlag = true;
-    //when an operator button is pressed, store the screen value to an operand
-    if(firstOperand === null){ //first operand is empty
-        firstOperand = parseFloat(calcScreen.textContent);
+
+    if(!(savedValue === null)){ //what's on screen must be the 2nd operand
+        equalsButton();
+
+    } else {
+        savedValue = parseFloat(calcScreen.textContent);
         calcScreen.textContent = "";
-        console.log("logged value in operand 1");
-    } else {//both are full.
-    //if both are full, perform the operation and then store the result in firstOperand
-    secondOperand = parseFloat(calcScreen.textContent);
-    firstOperand = operate(operator, firstOperand, secondOperand);
-    calcScreen.textContent = firstOperand;
-    secondOperand = null;
     };
 
-    operator = e.target.textContent;
-
+    operator = e.target.textContent
 };
 
 function equalsButton(){
-}
+    displayingAnswer = true;
+
+    if(!operator){
+        return;
+    } else {
+        console.log("hemlo");
+        let screenValue = parseFloat(calcScreen.textContent);
+        savedValue = operate(operator, savedValue, screenValue);
+        calcScreen.textContent = savedValue;
+        operator = null;
+    };
+};
 
 function add(a, b){
     return a + b;
@@ -74,7 +78,8 @@ for(let button of numButtons){
 };
 
 for(let button of oprButtons){
-    button.addEventListener("click", operatorButton);
+    if(!(button.textContent === "="))
+        button.addEventListener("click", operatorButton);
 }
 
 document.querySelector("#btn-eql").addEventListener("click", equalsButton);
