@@ -55,16 +55,23 @@ function decimalButton(){
 
 function operatorButton(e){
     // '+', '-', '*', '/'
+    let screenValue = parseFloat(calcScreen.textContent);
+    if(isNaN(screenValue)){
+        console.log("Is nan");
+        return;
+    }
+
     if(!(savedValue === null)){
         //if there is already a saved value: evaluate the previous equation, display the answer, then save it.
         savedValue = equalsButton();
-
+        if (isNaN(savedValue))
+            savedValue = null;
     } else {
-        savedValue = parseFloat(calcScreen.textContent);
+        savedValue = screenValue;
         calcScreen.textContent = "";
     };
 
-    operator = e.target.textContent
+    operator = e.target.textContent;
 };
 
 function equalsButton(){
@@ -79,7 +86,7 @@ function equalsButton(){
         operator = null;
         savedValue = null;
         //figure out how to display exponents
-        
+
         return calcScreen.textContent;
     };
 };
@@ -87,23 +94,34 @@ function equalsButton(){
 //calculator will round to 3 decimal points
 function add(a, b){
     let ans = a + b;
-    return Math.round(ans * 1000) / 1000;
+    return Math.round((ans + Number.EPSILON) * 1000) / 1000;
 };
 
 function subtract(a, b){
     let ans = a - b;
-    return Math.round(ans * 1000) / 1000;
+    return Math.round((ans + Number.EPSILON) * 1000) / 1000;
 };
 
 function multiply(a, b){
     let ans = a * b;
-    return Math.round(ans * 1000) / 1000;
+    return Math.round((ans + Number.EPSILON) * 1000) / 1000;
 };
 
 function divide(a, b){
+    if(b === 0){
+        return "Impossible";
+    }
     let ans = a / b;
-    return Math.round(ans * 1000) / 1000;
+    return Math.round((ans + Number.EPSILON) * 1000) / 1000;
 };
+
+function mod(a, b){
+    return a % b;
+}
+
+function exponent(a, b){
+    return Math.pow(a, b);
+}
 
 function operate(op, a, b){
     switch(op){
@@ -115,6 +133,10 @@ function operate(op, a, b){
             return multiply(a, b);
         case "/":
             return divide(a, b);
+        case "%":
+            return mod(a, b);
+        case "exp":
+            return exponent(a, b);
     };
 };
 

@@ -40,20 +40,20 @@ body{
 
 #screen{
     background-color: rgb(69, 71, 75);
-    text-align: end;
     width: 95%;
     height: 15%;
-    margin-top: 10px;
+    margin-top: 20px;
     box-sizing: border-box;
     border: 2px solid black;
 }
 #screen p{
     color: rgb(206, 206, 206);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 75px;
-    margin: 0px;
-    min-height: 75px;
-    padding: 5px 10px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: end;
+    font-size: 68px;
+    height: 100%;
+    margin-top: auto;
+    padding: 20px 10px;
 }
 
 .calculator-body{
@@ -97,8 +97,10 @@ body{
     height: 12%;
     flex-grow: 1;
     width: 100%;
-    margin-bottom: 0;
+    margin-top: auto;
     gap: 5px;
+
+    justify-content: space-between;
 }
 
 .numbers{
@@ -120,10 +122,21 @@ button{
     width: 100%;
 }
 .operators button{
-    background-color: rgb(71, 106, 151);
+    background-color: #4f6da2;
     font-size: 28px;
     border-radius: 25px;
     color: white;
+}
+.operators-top button{
+    max-width: 119px;
+}
+
+.functions button{
+    font-variant: small-caps;
+    background-color: #ec8d2c;
+    font-size: 24px;
+    width: 50%;
+    border-radius: 50px;
 }
 #btn-exp{
     font-size: 24px;
@@ -138,16 +151,9 @@ button{
     max-width: 119px;
 }
 
-#btn-clr{
-    max-width: 120px;
-    border-radius: 25px;
+#btn-mod{
+    max-width: 75px;
 }
-
-#btn-del{
-    border-radius: 25px;
-    max-width: 210px;
-}
-
 #btn-5{
     text-decoration: underline;
 }
