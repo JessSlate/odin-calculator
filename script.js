@@ -93,35 +93,31 @@ function equalsButton(){
 
 //calculator will round to 3 decimal points
 function add(a, b){
-    let ans = a + b;
-    return Math.round((ans + Number.EPSILON) * 1000) / 1000;
+    return a + b;
 };
 
 function subtract(a, b){
-    let ans = a - b;
-    return Math.round((ans + Number.EPSILON) * 1000) / 1000;
+    return a - b;
 };
 
 function multiply(a, b){
-    let ans = a * b;
-    return Math.round((ans + Number.EPSILON) * 1000) / 1000;
+    return a * b;
 };
 
 function divide(a, b){
     if(b === 0){
         return "Impossible";
     }
-    let ans = a / b;
-    return Math.round((ans + Number.EPSILON) * 1000) / 1000;
+    return a / b;
 };
 
 function mod(a, b){
     return a % b;
-}
+};
 
 function exponent(a, b){
     return Math.pow(a, b);
-}
+};
 
 function operate(op, a, b){
     switch(op){
@@ -140,6 +136,13 @@ function operate(op, a, b){
     };
 };
 
+function clear(){
+    savedValue = null;
+    operator = null;
+    displayingAnswer = false;
+    calcScreen.textContent = "";
+}
+
 let numButtons = document.querySelectorAll(".numbers button");
 let oprButtons = document.querySelectorAll(".operators button");
 
@@ -155,3 +158,4 @@ for(let button of oprButtons){
         button.addEventListener("click", operatorButton);
 };
 document.querySelector("#btn-eql").addEventListener("click", equalsButton);
+document.querySelector("#btn-clr").addEventListener("click", clear);
