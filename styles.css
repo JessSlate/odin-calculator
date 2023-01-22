@@ -35,7 +35,7 @@ body{
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    box-shadow: 10px 7px 7px rgb(175, 175, 175);
+    box-shadow: 10px 7px 7px lightgray;
 }
 
 #screen{
@@ -83,19 +83,27 @@ body{
 }
 
 .numbers,
-.operators{
+.operators-side{
     display: flex;
-    height: 88%;
-    gap: 2px;
+    height: 75%;
+    gap: 5px;
 }
-.operators{
+.operators-side{
     flex-grow: 1;
     flex-direction: column;
+}
+.operators-top{
+    display: flex;
+    height: 12%;
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: 0;
+    gap: 5px;
 }
 
 .numbers{
     flex-wrap: wrap;
-    width: 80%;
+    width: 82%;
 }
 
 button{
@@ -108,19 +116,24 @@ button{
 .numbers button{
     width: 30%;
 }
-
-.operators button{
+.operators-side button{
     width: 100%;
+}
+.operators button{
     background-color: rgb(71, 106, 151);
-
+    font-size: 28px;
     border-radius: 25px;
     color: white;
 }
+#btn-exp{
+    font-size: 24px;
+    font-variant: small-caps;
+    padding: 0;
+}
 #btn-eql{
-    height: 246px;
+    min-height: 200px;
 
 }
-
 #btn-dec{
     max-width: 119px;
 }

@@ -78,6 +78,8 @@ function equalsButton(){
         calcScreen.textContent = savedValue;
         operator = null;
         savedValue = null;
+        //figure out how to display exponents
+        
         return calcScreen.textContent;
     };
 };
