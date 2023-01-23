@@ -14,7 +14,7 @@ function numberButton(e){
     console.log(calcScreen.textContent.includes("."));
     if(calcScreen.textContent.split("").length < 10)
         calcScreen.textContent += e.target.textContent;
-                
+
 };
 
 function negate(){
@@ -30,6 +30,7 @@ function decimalButton(){
     }
     displayingAnswer = false;
 
+    //only allow for one decimal per operand
     let hasDecimal = calcScreen.textContent.includes(".");
     if(!hasDecimal)        
         calcScreen.textContent += ".";
@@ -37,7 +38,6 @@ function decimalButton(){
 };
 
 function operatorButton(e){
-    // '+', '-', '*', '/'
     let screenValue = parseFloat(calcScreen.textContent);
     if(isNaN(screenValue)) return;
     
@@ -50,7 +50,7 @@ function operatorButton(e){
         savedValue = screenValue;
         calcScreen.textContent = "";
     };
-
+    
     operator = e.target.textContent;
 };
 
@@ -66,41 +66,49 @@ function equalsButton(){
         calcScreen.textContent = savedValue;
         operator = null;
         savedValue = null;
-        //figure out how to display exponents
-
         return calcScreen.textContent;
     };
 };
 
 //calculator will round to 3 decimal points
 function add(a, b){
-    return a + b;
+    let ans = a + b;
+    return Math.round(ans * 1000)/1000;
 };
 
 function subtract(a, b){
-    return a - b;
+    let ans = a - b;
+
+    return Math.round(ans * 1000)/1000;
 };
 
 function multiply(a, b){
-    return a * b;
+    let ans =  a * b;
+
+    return Math.round(ans * 1000)/1000;
 };
 
 function divide(a, b){
     if(b === 0){
         return "Impossible";
     }
-    return a / b;
+    let ans = a / b;
+
+    return Math.round(ans * 1000)/1000;
 };
 
 function mod(a, b){
     if(b === 0){
         return "Impossible";
     }
-    return a % b;
+
+    let ans = a % b;
+    return Math.round(ans * 1000)/1000;
 };
 
 function exponent(a, b){
-    return Math.pow(a, b);
+    let ans = Math.pow(a, b);
+    return Math.round(ans * 1000)/1000;
 };
 
 function operate(op, a, b){
