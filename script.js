@@ -14,22 +14,7 @@ function numberButton(e){
     console.log(calcScreen.textContent.includes("."));
     if(calcScreen.textContent.split("").length < 10)
         calcScreen.textContent += e.target.textContent;
- 
-
-    /*
-    if(calcScreen.textContent.split("").length > 9)
-        return;
-    
-    if(e.target.textContent == "+/-"){
-        if(parseFloat(calcScreen.textContent))
-            calcScreen.textContent = parseFloat(calcScreen.textContent) * -1;
-    } else if(e.target.textContent == ".") {
-        if(!calcScreen.textContent.includes(".")){
-            calcScreen.textContent += e.target.textContent;
-        }
-    } else calcScreen.textContent += e.target.textContent; 
-    */
-        
+                
 };
 
 function negate(){
@@ -46,21 +31,16 @@ function decimalButton(){
     displayingAnswer = false;
 
     let hasDecimal = calcScreen.textContent.includes(".");
-    if(hasDecimal){
-        return;
-    } else {
+    if(!hasDecimal)        
         calcScreen.textContent += ".";
-    }
+
 };
 
 function operatorButton(e){
     // '+', '-', '*', '/'
     let screenValue = parseFloat(calcScreen.textContent);
-    if(isNaN(screenValue)){
-        console.log("Is nan");
-        return;
-    }
-
+    if(isNaN(screenValue)) return;
+    
     if(!(savedValue === null)){
         //if there is already a saved value: evaluate the previous equation, display the answer, then save it.
         savedValue = equalsButton();
@@ -81,6 +61,7 @@ function equalsButton(){
         return;
     } else {
         let screenValue = parseFloat(calcScreen.textContent);
+        savedValue = parseFloat(savedValue);
         savedValue = operate(operator, savedValue, screenValue);
         calcScreen.textContent = savedValue;
         operator = null;
@@ -146,6 +127,17 @@ function clear(){
     calcScreen.textContent = "";
 }
 
+function backspace(){
+    let screenValue = parseFloat(calcScreen.textContent);
+    if(displayingAnswer || isNaN(screenValue)) return;
+
+    screenValue = calcScreen.textContent.split("");
+    if(screenValue.length > 0){
+        screenValue.pop();
+        calcScreen.textContent = screenValue.join("");
+    };
+};
+
 let numButtons = document.querySelectorAll(".numbers button");
 let oprButtons = document.querySelectorAll(".operators button");
 
@@ -162,3 +154,4 @@ for(let button of oprButtons){
 };
 document.querySelector("#btn-eql").addEventListener("click", equalsButton);
 document.querySelector("#btn-clr").addEventListener("click", clear);
+document.querySelector("#btn-del").addEventListener("click", backspace);
